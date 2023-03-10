@@ -15,6 +15,13 @@ public class GenericMethod {
         printAllArray(intArr);
         printAllArray(doubleArr);
         printAllArray(strArr);
+        System.out.println("--------generic tip döndüren method--------");
+        int n=getFirst(intArr);
+        System.out.println(n);
+        System.out.println(getFirst(strArr));
+        System.out.println("--------birden fazla generic tip kullanan method--------");
+        printArrAndObject(strArr,55);
+        printArrAndObject(intArr,"Harika");
 
     }
     //arrayleri yazdırmak için method
@@ -40,6 +47,15 @@ public class GenericMethod {
     public static <T> T getFirst(T[] arr){
         T first=arr[0];
         return first;
+    }
+
+    //birden fazla generic tip parametresi alan method
+    //methodun iki farklı parametresinin data tipi..
+    public static <S,U> void printArrAndObject(S[] arr,U object){
+        Arrays.stream(arr).forEach(t-> System.out.print(t+" "));
+        System.out.println();
+        System.out.println(object);
+
     }
 
 }
