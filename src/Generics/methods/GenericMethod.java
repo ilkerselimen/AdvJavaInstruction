@@ -36,5 +36,10 @@ public class GenericMethod {
         Arrays.stream(arr).forEach(t-> System.out.print(t+" "));
         System.out.println();
     }
+    //sonuç döndüren generic method
+    public static <T> T getFirst(T[] arr){
+        T first=arr[0];
+        return first;
+    }
 
 }
