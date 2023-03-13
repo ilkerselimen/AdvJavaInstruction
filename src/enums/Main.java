@@ -70,4 +70,4 @@ package enums;
         }
 
     }
-}
+
