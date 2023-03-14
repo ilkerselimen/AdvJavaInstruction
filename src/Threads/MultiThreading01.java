@@ -1,5 +1,6 @@
 package Threads;
-
+//Thread bir processin parçasıdır, birden fazla thread kullandığımızda
+//multithreading yaparak eş zamanlı görevler yapabiliriz böylece CPU yu en verimli şekilde kullanabiliriz.
 public class MultiThreading01 {
     public static void main(String[] args) {
     long start=System.currentTimeMillis();
