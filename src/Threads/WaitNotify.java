@@ -3,10 +3,12 @@ package Threads;
 Bir öğrencinin banka hesabı için para yatırma(deposit) ve çekme işlemleri(withdraw) için uygulama
 Hesapta para yoksa para yatırılması(bakiyenin artması) beklensin.
 Bakiye artınca(yeterli olunca) para çekme gerçekleşsin.
+
+wait ve notify monitor edilen(kilitlenen) obje için çağırılır.
 */
 public class WaitNotify {
 
-    public static int balance=0;
+    public static int balance=0;//her iki thread de bakiyeyi değiştirmeye çalışıyor
 
     public static void main(String[] args) {
 
@@ -24,6 +26,11 @@ public class WaitNotify {
         Thread thread2=new Thread(new Runnable() {
             @Override
             public void run() {
+                try {
+                    Thread.sleep(5000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }//sonucu görebilmek için
                 obj.deposit(2000);
             }
         });
@@ -41,7 +48,8 @@ public class WaitNotify {
             System.out.println("Bakiye yetersiz...Mevcut bakiye :"+balance);
             System.out.println("Bakiyenin güncellenmesini bekliyor.");
             try {
-                wait();
+                wait();//Object classının static methodu wait methodu hangi thread üzerinde ise thread geçici olarak beklemeye alınır.
+                       //obj nesnesi geçici serbest bırakılıyor.
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);
             }
@@ -60,7 +68,8 @@ public class WaitNotify {
         System.out.println(Thread.currentThread().getName()+" para yatırmak istiyor...");
         balance=balance+amount;
         System.out.println("Para yatırma işlemi gerçekleşti...Mevcut bakiye:"+balance);
-        notify();
+        //bakiye güncelleme yapıldığı için diğer threade haber gönderiyor
+        notify();//obj serbest bırakmaz.
         System.out.println();
         System.out.println("notify metodu çağırılınca hemen kilidi serbest bırakmıyor metodun tamamlanmasını bekler. ");
     }
